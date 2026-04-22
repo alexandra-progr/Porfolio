@@ -4,6 +4,7 @@ import { BlurText } from "@/components/BlurText";
 import { STATS } from "@/lib/data";
 
 const STATS_BG_VIDEO = ""; // [TODO: Set your Stats background video URL (MP4 or HLS .m3u8)]
+const STATS_BG_IMAGE = "/court.jpg";
 
 type StatItemProps = { value: string; label: string; inView: boolean };
 
@@ -80,9 +81,19 @@ export function Stats() {
         />
       )}
 
-      {/* Gradient background fallback */}
+      {/* Photo background */}
+      {!STATS_BG_VIDEO && STATS_BG_IMAGE && (
+        <img
+          src={STATS_BG_IMAGE}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center saturate-0 opacity-45"
+        />
+      )}
+
+      {/* Dark base (shows through desaturated photo) */}
       {!STATS_BG_VIDEO && (
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(14_30%_12%)] to-[hsl(20_15%_6%)]" />
+        <div className="absolute inset-0 bg-[hsl(20_15%_5%)]" style={{ zIndex: -1 }} />
       )}
 
       {/* Top/bottom fades */}

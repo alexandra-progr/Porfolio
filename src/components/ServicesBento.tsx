@@ -11,6 +11,8 @@ const iconMap: Record<string, LucideIcon> = {
   Truck, Package, Warehouse, Globe, Building2, Sparkles,
 };
 
+const BENTO_HERO_IMAGE = "/court.jpg";
+
 const cardLayouts = [
   "md:row-span-2 md:col-span-1 p-8 min-h-[480px]",
   "md:col-span-1 p-6 min-h-[228px]",
@@ -60,17 +62,30 @@ export function ServicesBento() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
               >
-                <div className="liquid-glass-strong rounded-full w-11 h-11 flex items-center justify-center mb-5 shrink-0">
+                {/* Photo background on the tall hero card */}
+                {idx === 0 && BENTO_HERO_IMAGE && (
+                  <>
+                    <img
+                      src={BENTO_HERO_IMAGE}
+                      alt=""
+                      aria-hidden="true"
+                      className="absolute inset-0 w-full h-full object-cover object-top opacity-35 transition-opacity duration-500 group-hover:opacity-45"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent" />
+                  </>
+                )}
+
+                <div className="liquid-glass-strong rounded-full w-11 h-11 flex items-center justify-center mb-5 shrink-0 relative">
                   <Icon className="size-5 text-foreground" />
                 </div>
                 <h3
-                  className="uppercase text-2xl md:text-3xl leading-[0.95] tracking-tight mb-3 max-w-[18ch]"
+                  className="relative uppercase text-2xl md:text-3xl leading-[0.95] tracking-tight mb-3 max-w-[18ch]"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {service.title}
                 </h3>
                 <p
-                  className="text-sm text-foreground/65 max-w-[38ch] leading-relaxed"
+                  className="relative text-sm text-foreground/65 max-w-[38ch] leading-relaxed"
                   style={{ fontFamily: "var(--font-body)" }}
                 >
                   {service.body}
